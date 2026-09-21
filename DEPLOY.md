@@ -1,4 +1,4 @@
-# Baseball Trivia — Deployment Guide
+# Boxing Trivia — Deployment Guide
 
 This is app #3 in the ASF family and deploys exactly like the Basketball and Football apps:
 **GitHub → Vercel → GoDaddy DNS → Supabase (leaderboard) → Stripe (Pro).**
@@ -11,7 +11,7 @@ The app works with zero backend (local leaderboard + Pro preview). The steps bel
 
 ## 0. What's in this folder
 ```
-asf-baseball-trivia/
+asf-boxing-trivia/
 ├── index.html            ← app shell (dark bg, fonts, placeholder styling)
 ├── package.json          ← Vite + React + Supabase
 ├── vite.config.js        ← Vite config (base: './')
@@ -28,7 +28,7 @@ asf-baseball-trivia/
 ---
 
 ## 1. GitHub
-1. Create a **new private repo**: `asf-baseball-trivia`.
+1. Create a **new private repo**: `asf-boxing-trivia`.
 2. Upload the **contents** of this folder (not the folder itself). Keep the `src/` and `api/` folders intact.
 3. Commit.
 
@@ -36,14 +36,14 @@ asf-baseball-trivia/
 > On Safari/iPad, make sure it saves as `App.jsx` and does **not** rename to `App-2.jsx`.
 
 ## 2. Vercel
-1. **Add New → Project → Import** the `asf-baseball-trivia` repo.
+1. **Add New → Project → Import** the `asf-boxing-trivia` repo.
 2. Vercel auto-detects **Vite**. Leave build settings as detected
    (Build: `npm run build`, Output: `dist`). Deploy.
 3. You'll get a `*.vercel.app` URL. Test it — the game is fully playable already
    (leaderboard will be local-only, Pro will say "not configured" until steps 4–5).
 
 ## 3. GoDaddy DNS (custom domain)
-Point your domain (e.g. **baseballtriviaapp.com**) at Vercel:
+Point your domain (e.g. **boxingtriviaapp.com**) at Vercel:
 - **A** record: `@` → `76.76.21.21`
 - **CNAME** record: `www` → `cname.vercel-dns.com`
 
@@ -52,13 +52,13 @@ DNS can take a little while to propagate.
 
 ## 4. Supabase (global leaderboard)
 Follow **SUPABASE_SETUP.md**. In short:
-1. New project: `asf-baseball-trivia`.
+1. New project: `asf-boxing-trivia`.
 2. Run the SQL in that file to create the `leaderboard` table + policies.
 3. Copy the **Project URL** and the **legacy anon public key** (the long `eyJ...` JWT —
    **not** a `sb_publishable_...` key and **never** the `service_role` key).
 
-## 5. Stripe (Pro — $9.99/year)
-1. Create a **Product**: "Baseball Trivia Pro", **recurring**, **$9.99 / year**.
+## 5. Stripe (Pro — $29.99/year)
+1. Create a **Product**: "Boxing Trivia Pro", **recurring**, **$29.99 / year**.
 2. Copy the **Price ID** (`price_...`).
 3. Copy your **Secret key** (`sk_live_...` for real payments, or `sk_test_...` to test).
 
@@ -86,7 +86,7 @@ In **Vercel → Project → Settings → Environment Variables** (Production), a
 
 ## How Pro works
 Pro is **device-based**: after a successful Stripe checkout, Stripe redirects to `/?pro=success`
-and the app stores `baseball_pro="1"` in that browser's local storage. That unlocks the Legends
+and the app stores `boxing_pro="1"` in that browser's local storage. That unlocks the Legends
 level, 5 hints, 3 shields, the daily points bonus, and the Pro leaderboard badge on that device.
 
 ## Wiring the "Unlock Pro" button to Stripe (optional polish)
@@ -106,7 +106,7 @@ device-preview behavior for launch, you can leave it as-is.)
 npm install
 npm run build      # standard build → dist/
 ```
-Or just double-click **Baseball-Trivia-PLAYABLE.html** for a fully offline preview.
+Or just double-click **Boxing-Trivia-PLAYABLE.html** for a fully offline preview.
 
 ## Featuring an athlete (built-in, no code archaeology)
 Open `src/App.jsx`, find the `ATHLETE` object near the top, set `enabled: true`,

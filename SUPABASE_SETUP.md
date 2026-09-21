@@ -1,17 +1,17 @@
-# Supabase Setup — Baseball Trivia Leaderboard
+# Supabase Setup — Boxing Trivia Leaderboard
 
 The app runs fine without Supabase (it falls back to a per-device local leaderboard).
 Do this to enable a **global** leaderboard shared by all players.
 
 ## 1. Create the project
-- New project name: **asf-baseball-trivia**
+- New project name: **asf-boxing-trivia**
 - Pick a region close to your players and save the database password somewhere safe.
 
 ## 2. Create the table + policies
 Open **SQL Editor** and run this:
 
 ```sql
--- Leaderboard for Baseball Trivia
+-- Leaderboard for Boxing Trivia
 create table if not exists public.leaderboard (
   id          bigint generated always as identity primary key,
   name        text not null,

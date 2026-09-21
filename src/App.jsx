@@ -1072,21 +1072,64 @@ function GhostButton({ children, onClick, color = T.body, style }) {
   )
 }
 
+/* ===================== ICONS (premium inline SVG set) ===================== */
+function Icon({ name, size = 16, color = 'currentColor', stroke = 2, style }) {
+  const s = { fill: 'none', stroke: color, strokeWidth: stroke, strokeLinecap: 'round', strokeLinejoin: 'round' }
+  const M = {
+    user:        (<><circle cx="12" cy="8" r="4" {...s} /><path d="M4 20c0-4 4-6 8-6s8 2 8 6" {...s} /></>),
+    pencil:      (<><path d="M12 20h9" {...s} /><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z" {...s} /></>),
+    volumeOn:    (<><path d="M11 5 6 9H2v6h4l5 4z" {...s} /><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14" {...s} /></>),
+    volumeOff:   (<><path d="M11 5 6 9H2v6h4l5 4z" {...s} /><path d="M22 9l-6 6M16 9l6 6" {...s} /></>),
+    zap:         (<path d="M13 2 3 14h9l-1 8 10-12h-9z" {...s} />),
+    flag:        (<><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" {...s} /><path d="M4 22V4" {...s} /></>),
+    calendar:    (<><rect x="3" y="4" width="18" height="18" rx="2" {...s} /><path d="M3 10h18M8 2v4M16 2v4" {...s} /></>),
+    crown:       (<><path d="M2 7l5 5 5-8 5 8 5-5-2.5 13h-15z" {...s} /><path d="M4.5 21h15" {...s} /></>),
+    trophy:      (<><path d="M6 4h12v6a6 6 0 0 1-12 0z" {...s} /><path d="M6 6H3v1a4 4 0 0 0 4 4M18 6h3v1a4 4 0 0 1-4 4" {...s} /><path d="M9 20h6M12 15v5" {...s} /></>),
+    book:        (<><path d="M12 7v13" {...s} /><path d="M3 5a2 2 0 0 1 2-2h4a3 3 0 0 1 3 3 3 3 0 0 1 3-3h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-5a3 3 0 0 0-3 3 3 3 0 0 0-3-3H5a2 2 0 0 1-2-2z" {...s} /></>),
+    lock:        (<><rect x="4" y="10" width="16" height="11" rx="2" {...s} /><path d="M8 10V7a4 4 0 0 1 8 0v3" {...s} /></>),
+    chevronRight:(<path d="M9 6l6 6-6 6" {...s} />),
+    close:       (<path d="M6 6l12 12M18 6L6 18" {...s} />),
+    flame:       (<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5z" {...s} />),
+    shield:      (<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" {...s} />),
+    bulb:        (<><path d="M9 18h6M10 22h4" {...s} /><path d="M15 14c.2-1 .7-1.7 1.5-2.5A5.5 5.5 0 1 0 7.5 11.5C8.3 12.3 8.8 13 9 14" {...s} /></>),
+    image:       (<><rect x="3" y="3" width="18" height="18" rx="2" {...s} /><circle cx="9" cy="9" r="2" {...s} /><path d="M21 15l-4-4-8 8" {...s} /></>),
+    clipboard:   (<><rect x="8" y="2" width="8" height="4" rx="1" {...s} /><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" {...s} /></>),
+    check:       (<path d="M20 6 9 17l-5-5" {...s} />),
+    info:        (<><circle cx="12" cy="12" r="9" {...s} /><path d="M12 11v5M12 7.5h.01" {...s} /></>),
+  }
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true"
+      style={{ display: 'block', flex: '0 0 auto', ...style }}>{M[name]}</svg>
+  )
+}
+
+const BOXING_GLOVE_SRC = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgwIiBoZWlnaHQ9IjEyODAiIHZpZXdCb3g9IjAgMCAxMjgwIDEyODAiIGZpbGw9Im5vbmUiPgogPHRpdGxlPlByZW1pdW0gYmxhY2sgYW5kIGdvbGQgYm94aW5nIGdsb3ZlPC90aXRsZT4KIDxkZXNjPkVkaXRhYmxlIHZlY3RvciBpbnRlcnByZXRhdGlvbiBvZiB0aGUgb3JpZ2luYWwgYm94aW5nIGdsb3ZlLCB3aXRoIGJsYWNrIGxlYXRoZXIgc2hhZGluZyBhbmQgZ29sZCBwaXBpbmcgb24gYSB0cmFuc3BhcmVudCBiYWNrZ3JvdW5kLjwvZGVzYz4KIDxkZWZzPgogIDxsaW5lYXJHcmFkaWVudCBpZD0ibGVhdGhlciIgeDE9IjQ2MCIgeTE9IjExMCIgeDI9Ijg5MCIgeTI9IjgxMCIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIHN0b3AtY29sb3I9IiMxNTE2MTkiLz48c3RvcCBvZmZzZXQ9Ii4zIiBzdG9wLWNvbG9yPSIjMzUzNjNiIi8+PHN0b3Agb2Zmc2V0PSIuNDgiIHN0b3AtY29sb3I9IiM1MzU0NWEiLz48c3RvcCBvZmZzZXQ9Ii42NSIgc3RvcC1jb2xvcj0iIzI5MmEyZSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzBhMGIwZCIvPjwvbGluZWFyR3JhZGllbnQ+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJ0aHVtYiIgeDE9IjMwMCIgeTE9IjM0MCIgeDI9IjUzMiIgeTI9IjY5NyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIHN0b3AtY29sb3I9IiM0NTQ2NGEiLz48c3RvcCBvZmZzZXQ9Ii4zOCIgc3RvcC1jb2xvcj0iIzI2MjcyYSIvPjxzdG9wIG9mZnNldD0iLjc2IiBzdG9wLWNvbG9yPSIjMTExMjE0Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMDUwNjA3Ii8+PC9saW5lYXJHcmFkaWVudD4KICA8bGluZWFyR3JhZGllbnQgaWQ9ImN1ZmYiIHgxPSI0MzgiIHkxPSI4NDMiIHgyPSI3NzkiIHkyPSIxMTU2IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agc3RvcC1jb2xvcj0iIzNiM2EzYyIvPjxzdG9wIG9mZnNldD0iLjM1IiBzdG9wLWNvbG9yPSIjMTcxODFiIi8+PHN0b3Agb2Zmc2V0PSIuNyIgc3RvcC1jb2xvcj0iIzI4MjgyYiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzA5MGEwYyIvPjwvbGluZWFyR3JhZGllbnQ+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJnb2xkIiB4MT0iMzUwIiB5MT0iMjYwIiB4Mj0iODYwIiB5Mj0iMTAwMCIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIHN0b3AtY29sb3I9IiM4NDUwMTgiLz48c3RvcCBvZmZzZXQ9Ii4xOCIgc3RvcC1jb2xvcj0iI2ZiZTNhMCIvPjxzdG9wIG9mZnNldD0iLjMyIiBzdG9wLWNvbG9yPSIjYjY3YTI4Ii8+PHN0b3Agb2Zmc2V0PSIuNSIgc3RvcC1jb2xvcj0iI2ZmZTlhZSIvPjxzdG9wIG9mZnNldD0iLjY2IiBzdG9wLWNvbG9yPSIjYjQ3OTIzIi8+PHN0b3Agb2Zmc2V0PSIuODQiIHN0b3AtY29sb3I9IiNmNmQ1OGIiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM5MzYwMWQiLz48L2xpbmVhckdyYWRpZW50PgogIDxsaW5lYXJHcmFkaWVudCBpZD0iZWRnZSIgeDE9IjQxNCIgeTE9IjgxMCIgeDI9Ijc5OSIgeTI9IjExMjAiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBzdG9wLWNvbG9yPSIjZmNlN2I2Ii8+PHN0b3Agb2Zmc2V0PSIuNSIgc3RvcC1jb2xvcj0iI2E3NzUzMCIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2Y3ZDk5NCIvPjwvbGluZWFyR3JhZGllbnQ+CiA8L2RlZnM+CiA8ZyBpZD0id3Jpc3QiPgogIDxwYXRoIGQ9Ik00NTUgNzY2IEM1NDggNzkyIDcyNSA4MjkgODU1IDgzNSBMODMxIDkzOCBMNzc3IDExMzkgUTc2MiAxMTg0IDcxNCAxMTcyIEM1OTkgMTE1NCA0ODkgMTEyMCA0MDYgMTA4MiBRMzgyIDEwNzAgMzk2IDEwMjcgWiIgZmlsbD0idXJsKCNjdWZmKSIgc3Ryb2tlPSIjMDgwOTBhIiBzdHJva2Utd2lkdGg9IjgiLz4KICA8cGF0aCBkPSJNNDE2IDEwMDAgTDM5OSAxMDQ3IFEzOTUgMTA2NSA0MTcgMTA3NyBDNTAzIDExMjAgNjM2IDExNTUgNzMzIDExNjcgUTc1OCAxMTcxIDc2NiAxMTQ2IiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMTUiLz4KICA8cGF0aCBkPSJNNDAwIDEwNDUgQzQ5MiAxMDk4IDY0MSAxMTQwIDc3MSAxMTU0IiBzdHJva2U9IiNmZmU3YWMiIHN0cm9rZS13aWR0aD0iMyIvPgogIDxwYXRoIGQ9Ik00NjEgODA2IEM1NjkgODQ0IDcxOSA4NzEgODQ2IDg2NiBMODI2IDkxNyBDNzAyIDkwOCA1NTUgODc0IDQ0NiA4NDAgWiIgZmlsbD0iIzA5MGEwYyIgc3Ryb2tlPSIjNTY1MzU0IiBzdHJva2Utd2lkdGg9IjMiLz4KICA8cGF0aCBkPSJNNDQ4IDgxOCBDNTYwIDg1OSA3MjQgODg5IDg0MiA4ODYiIHN0cm9rZT0idXJsKCNnb2xkKSIgc3Ryb2tlLXdpZHRoPSIxNyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTQ1MSA4MTQgQzU2NiA4NTYgNzI0IDg4NCA4NDEgODgxIiBzdHJva2U9IiNmZmU4YjUiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTUzMCA4NjAgQzYxNSA4ODAgNzIyIDkwMSA4MzAgOTA2IEw3OTEgMTA4NSBRNzg1IDExMDcgNzYwIDExMDYgQzY1NiAxMDk0IDU0OSAxMDYzIDQ1OCAxMDI1IFE0NDMgMTAxOSA0NDkgOTk3IEw0NzkgODkzIFE0OTEgODU0IDUzMCA4NjBaIiBmaWxsPSJ1cmwoI2N1ZmYpIiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMTIiLz4KICA8cGF0aCBkPSJNNTMwIDg3MCBDNjIyIDg5MyA3MjQgOTExIDgxOCA5MTQgTDc4MiAxMDgxIFE3NzggMTA5NyA3NjAgMTA5NiBDNjQ4IDEwODIgNTUyIDEwNTQgNDY2IDEwMTggUTQ1NSAxMDEzIDQ1OSA5OTkgTDQ4OSA4OTYgUTQ5OSA4NjQgNTMwIDg3MFoiIHN0cm9rZT0iI2QzYTY1OSIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPHBhdGggZD0iTTQ0MCA4NTUgTDQwNiAxMDA0IE00MzggODY2IEw0MTAgOTkyIiBzdHJva2U9IiNiNDk4NjYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWRhc2hhcnJheT0iMyA3Ii8+CiA8L2c+CiA8ZyBpZD0ia251Y2tsZXMiPgogIDxwYXRoIGQ9Ik0zNzEgMjcxIEMzNzMgMTcyIDQyNSA4OSA1NDcgNzkgQzY2NSA2OCA4MDkgMTE4IDkwOSAyMTMgQzEwMDcgMzA1IDEwMzggNDMyIDEwMDIgNTY1IEM5NzcgNjU3IDkyMCA3NDYgODU1IDg0MyBDNzM5IDg3NSA1NjQgODE2IDQ3MiA3NzYgQzQxOCA3MDcgMzk0IDU4MiAzNzggNDY1IEMzNzAgMzk1IDM2MyAzMjggMzcxIDI3MVoiIGZpbGw9InVybCgjbGVhdGhlcikiIHN0cm9rZT0iIzE1MTYxOSIgc3Ryb2tlLXdpZHRoPSI0Ii8+CiAgPHBhdGggZD0iTTQyNiAyNjQgQzQwNCAyMjIgNDIyIDE1NCA0NzUgMTExIiBzdHJva2U9IiM2MTQ2MWYiIHN0cm9rZS13aWR0aD0iOSIvPgogIDxwYXRoIGQ9Ik00MjYgMjYzIEM0MDcgMjE5IDQyNiAxNTIgNDc2IDExMCIgc3Ryb2tlPSJ1cmwoI2dvbGQpIiBzdHJva2Utd2lkdGg9IjUiLz4KICA8cGF0aCBkPSJNNDc4IDEwOSBDNjE2IDQ2IDgwOSAxMjYgOTA4IDIyMCBDOTYwIDI2OSA5OTUgMzM1IDEwMDcgNDA1IiBzdHJva2U9IiNiOWI2YjAiIHN0cm9rZS1vcGFjaXR5PSIuNTUiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxnIHN0cm9rZT0iIzA3MDgwYSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBvcGFjaXR5PSIuNiI+CiAgIDxwYXRoIGQ9Ik00MzkgMjcyIFE0MjYgMjI1IDQ2MSAxODEgTTQ0OSAyODIgUTQ1MCAyMjUgNDkzIDE3OSBNNDU5IDI5MiBRNDc4IDI0MyA1MjEgMjI0IE00NjkgMzA3IFE0OTggMjgwIDUzNSAyNjkgTTQ3OCAzMjIgUTUxMyAzMTAgNTUxIDMwMCBNNDg2IDM0MCBRNTIyIDM0MCA1NTUgMzI2IiBzdHJva2Utd2lkdGg9IjgiLz4KICAgPHBhdGggZD0iTTQ5OSA0NjUgUTU1MiA1MjIgNjAxIDUxOSBNNTA5IDQ5MCBRNTU4IDU0NiA2MDggNTQ3IE01MzEgNTkwIFE1NzEgNjE2IDYxOCA2MDYgTTU1MCA3MDEgUTU4MCA3MzEgNjIyIDczNCIgc3Ryb2tlLXdpZHRoPSI2Ii8+CiAgPC9nPgogIDxnIHN0cm9rZT0iIzkxOTA5NiIgc3Ryb2tlLW9wYWNpdHk9Ii4yIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+CiAgIDxwYXRoIGQ9Ik00MzggMjU3IFE0MzkgMjEzIDQ3MCAxODIgTTQ1MiAyNzQgUTQ2OSAyMjUgNTA1IDIxMCBNNDcxIDI5OCBRNTA1IDI4MSA1MzUgMjc4IE00OTAgMzQ5IFE1MjQgMzU1IDU1NyAzMzkgTTUyMSA0OTEgUTU2MSA1MzAgNjAyIDUyOSBNNTQwIDU4NiBRNTc4IDYwOSA2MTIgNTk5Ii8+CiAgPC9nPgogPC9nPgogPGcgaWQ9InBhbG0iPgogIDxwYXRoIGQ9Ik00NTUgNDEzIEM0OTIgNDQ4IDUyMyA1MDUgNTU3IDU1OCBDNTkzIDYxNiA2MDcgNzA3IDU3MSA3OTkgTDQ3NiA3NzUgQzQ0MSA3MjEgNDExIDYzNiA0MTYgNTYwWiIgZmlsbD0idXJsKCN0aHVtYikiIHN0cm9rZT0iIzA5MGEwYiIgc3Ryb2tlLXdpZHRoPSI2Ii8+CiAgPHBhdGggZD0iTTQ3NSA0NzQgQzQ5MyA1MTYgNTQxIDU1OCA1NjAgNjEzIEM1NzkgNjY2IDU3OSA3MzQgNTU4IDc4NyIgc3Ryb2tlPSJ1cmwoI2dvbGQpIiBzdHJva2Utd2lkdGg9IjExIi8+CiAgPHBhdGggZD0iTTQ4MCA0NzcgQzUwMiA1MjUgNTQ2IDU2NiA1NjUgNjIyIEM1ODEgNjc3IDU3OCA3MzkgNTYyIDc4NSIgc3Ryb2tlPSIjZmZmMGJlIiBzdHJva2Utb3BhY2l0eT0iLjY1IiBzdHJva2Utd2lkdGg9IjIiLz4KICA8cGF0aCBkPSJNNDY1IDU5NyBRNDkwIDYyOCA1MjkgNjM1IE00NjUgNjI2IFE0OTAgNjU5IDUzNiA2NjkgTTQ3NSA2NjggUTQ5OCA2OTQgNTM5IDcwNCBNNDgwIDcwNyBRNTA2IDc0MCA1NDAgNzQ4IiBzdHJva2U9IiMwOTBhMGIiIHN0cm9rZS13aWR0aD0iNyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiA8L2c+CiA8ZyBpZD0idGh1bWIiPgogIDxwYXRoIGQ9Ik0zOTUgMjczIEMzMzQgMjgyIDI5MSAzNDQgMjc1IDQxNCBDMjU0IDUwNyAyNzMgNjA1IDMyMSA2ODEgQzM1MyA3MzIgNDA2IDc3MyA0NjUgNzg2IEM0NDUgNzQ0IDQyMyA2OTggNDI2IDY0OSBDNDI5IDU5NiA0NDggNTU3IDQ3OCA1MTEgQzUxNCA0NTUgNTEwIDM4OSA0OTAgMzM1IEM0NzMgMjkwIDQzNyAyNjMgMzk1IDI3M1oiIGZpbGw9InVybCgjdGh1bWIpIiBzdHJva2U9IiMxNzE3MTkiIHN0cm9rZS13aWR0aD0iNCIvPgogIDxwYXRoIGQ9Ik0zNjkgMjgzIEM0MTEgMjYxIDQ1OCAyODAgNDg0IDMyNyBDNTEzIDM3OSA1MTIgNDQ3IDQ4MCA1MDQgQzQ1MiA1NTUgNDI1IDU5NSA0MjMgNjQ3IEM0MTkgNzAxIDQ0OSA3NTggNDY3IDc4NCIgc3Ryb2tlPSIjNTkzYzE2IiBzdHJva2Utd2lkdGg9IjE3IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNMzY5IDI4MCBDNDExIDI2MSA0NTggMjgwIDQ4NCAzMjcgQzUxMyAzNzkgNTEyIDQ0NyA0ODAgNTA0IEM0NTIgNTU1IDQyNSA1OTUgNDIzIDY0NyBDNDE5IDcwMSA0NDkgNzU4IDQ2NyA3ODQiIHN0cm9rZT0idXJsKCNnb2xkKSIgc3Ryb2tlLXdpZHRoPSIxMSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTM3MCAyNzcgQzQxMiAyNjAgNDU5IDI4MSA0ODEgMzI2IEM1MDkgMzgwIDUwOCA0NDYgNDc2IDUwMiBDNDQ4IDU1MiA0MjEgNTk1IDQxOSA2NDcgQzQxNSA3MDIgNDQ1IDc1OCA0NjMgNzg0IiBzdHJva2U9IiNmZmUzYTIiIHN0cm9rZS1vcGFjaXR5PSIuNyIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPHBhdGggZD0iTTMwMyAzNzEgQzI3NyA0MjEgMjczIDQ3MyAyODEgNTIyIiBzdHJva2U9IiNhYzljODIiIHN0cm9rZS1vcGFjaXR5PSIuMjciIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTQzOSA0ODQgUTQ1OCA0NzQgNDY5IDQ1NCBNNDMzIDQ5NyBRNDUzIDQ5MSA0NjMgNDc5IE00MTQgNTkzIFEzOTcgNjE4IDQwMyA2NTQgTTQxNiA3MTYgUTQyOCA3NDYgNDQ0IDc2MSIgc3Ryb2tlPSIjMDUwNjA4IiBzdHJva2Utb3BhY2l0eT0iLjYiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiA8L2c+Cjwvc3ZnPgo='
+
+/* Brand mark: a real boxing-glove logo for Boxing; other sports fall back to CONFIG.emoji. */
+function BrandMark({ size = 48, color = T.gold }) {
+  if (CONFIG.sport === 'Boxing') {
+    return (
+      <img src={BOXING_GLOVE_SRC} width={size} height={size} alt="" aria-hidden="true" style={{ display: 'block' }} />
+    )
+  }
+  return <span style={{ fontSize: size * 0.9, lineHeight: 1 }}>{CONFIG.emoji}</span>
+}
+
 /* ===================== HERO ===================== */
 function Hero() {
   return (
     <div style={{
       textAlign: 'center', padding: '30px 16px 22px',
-      backgroundImage: FIELD_BG, backgroundSize: 'auto, auto, auto',
-      borderRadius: 20, border: `1px solid ${T.border}`, marginBottom: 18,
+      backgroundImage: 'radial-gradient(circle at 50% 20%, rgba(52,211,153,0.28), rgba(52,211,153,0) 55%), linear-gradient(155deg, #10553A 0%, #0B3B28 55%, #07271A 100%)',
+      borderRadius: 20, border: '1px solid #1E6B4A', marginBottom: 18,
     }}>
       <div style={{
         fontFamily: 'Rajdhani, sans-serif', fontWeight: 700, letterSpacing: 3,
         color: T.gold, fontSize: 13, textTransform: 'uppercase',
       }}>ASF</div>
-      <div style={{ fontSize: 46, lineHeight: 1, margin: '6px 0 2px' }}>{CONFIG.emoji}</div>
+      <div style={{ margin: '6px 0 2px', display: 'flex', justifyContent: 'center' }}><BrandMark size={68} /></div>
       <h1 style={{
-        fontFamily: 'Bebas Neue, sans-serif', color: '#FFFFFF', margin: '4px 0 6px',
+        fontFamily: 'Bebas Neue, sans-serif', color: '#7CF0BE', margin: '4px 0 6px',
         fontSize: 52, letterSpacing: 2, lineHeight: 0.95,
       }}>{CONFIG.title}</h1>
       <div style={{
@@ -1134,11 +1177,12 @@ function Home({ career, isPro, onStart, onUnlockPro, onManagePro, onLeaderboard,
           background: T.surface, border: `1px solid ${T.border}`, color: T.body, borderRadius: 999,
           padding: '7px 14px', cursor: 'pointer', fontFamily: 'Rajdhani, sans-serif', fontWeight: 700,
           fontSize: 13, maxWidth: '72%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
-        }}>👤 {playerName ? playerName : 'Set your name'} ✎</button>
+        }}><span style={{display:'inline-flex',alignItems:'center',gap:6,maxWidth:'100%'}}><Icon name="user" size={15}/><span style={{overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{playerName ? playerName : 'Set your name'}</span><Icon name="pencil" size={13}/></span></button>
         <button onClick={onToggleMute} aria-label="Toggle sound" style={{
           background: T.surface, border: `1px solid ${T.border}`, color: muted ? T.dim : T.gold,
-          borderRadius: 999, width: 40, height: 40, cursor: 'pointer', fontSize: 18,
-        }}>{muted ? '🔇' : '🔊'}</button>
+          borderRadius: 999, width: 40, height: 40, cursor: 'pointer',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+        }}><Icon name={muted ? 'volumeOff' : 'volumeOn'} size={18} /></button>
       </div>
       <Hero />
       <AthleteCard />
@@ -1172,23 +1216,23 @@ function Home({ career, isPro, onStart, onUnlockPro, onManagePro, onLeaderboard,
 
       {/* modes */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 12 }}>
-        <ModeTile title="Quick Play" emoji="⚡" sub="20 questions" onClick={() => onStart({ mode: 'quick' })} />
-        <ModeTile title="Marathon" emoji="🏟️" sub="Full level run" onClick={() => onStart({ mode: 'marathon' })} />
-        <ModeTile title="Daily" emoji="📅" sub={dailyDoneToday ? 'Done today ✓' : 'Same for all'} onClick={() => onStart({ mode: 'daily' })} />
-        <ModeTile title="Legends" emoji="👑" sub={isPro ? '150 all-time' : 'Pro only'} locked={!isPro} onClick={() => (isPro ? onStart({ mode: 'legends' }) : onUnlockPro())} />
+        <ModeTile title="Quick Play" icon={<Icon name="zap" size={26} />} sub="20 questions" onClick={() => onStart({ mode: 'quick' })} />
+        <ModeTile title="Marathon" icon={<Icon name="flag" size={26} />} sub="Full level run" onClick={() => onStart({ mode: 'marathon' })} />
+        <ModeTile title="Daily" icon={<Icon name="calendar" size={26} />} sub={dailyDoneToday ? 'Done today' : 'Same for all'} onClick={() => onStart({ mode: 'daily' })} />
+        <ModeTile title="Legends" icon={<Icon name="crown" size={26} />} sub={isPro ? '150 all-time' : 'Pro only'} locked={!isPro} onClick={() => (isPro ? onStart({ mode: 'legends' }) : onUnlockPro())} />
       </div>
 
       {/* Leaderboard + How to Play */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 12 }}>
-        <GhostButton onClick={onLeaderboard} color={T.gold}>🏆 Leaderboard</GhostButton>
-        <GhostButton onClick={onHowTo}>📖 How to Play</GhostButton>
+        <GhostButton onClick={onLeaderboard} color={T.gold}><span style={{display:'inline-flex',alignItems:'center',justifyContent:'center',gap:8}}><Icon name="trophy" size={16} />Leaderboard</span></GhostButton>
+        <GhostButton onClick={onHowTo}><span style={{display:'inline-flex',alignItems:'center',justifyContent:'center',gap:8}}><Icon name="book" size={16} />How to Play</span></GhostButton>
       </div>
 
       {/* Pro strip */}
       {isPro ? (
         <Card style={{ marginBottom: 12, borderColor: `${T.gold}55` }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <span style={{ fontSize: 22 }}>👑</span>
+            <Icon name="crown" size={20} color={T.gold} />
             <div style={{ flex: 1 }}>
               <div style={{ fontFamily: 'Bebas Neue, sans-serif', color: T.gold, fontSize: 22, letterSpacing: 1 }}>PRO ACTIVE</div>
               <div style={{ fontFamily: 'Rajdhani, sans-serif', color: T.body, fontSize: 13 }}>5 hints · 3 shields · Legends · Pro leaderboard</div>
@@ -1200,7 +1244,7 @@ function Home({ career, isPro, onStart, onUnlockPro, onManagePro, onLeaderboard,
         <Card style={{ marginBottom: 12, borderColor: `${T.gold}55` }}>
           <div style={{ fontFamily: 'Bebas Neue, sans-serif', color: T.gold, fontSize: 24, letterSpacing: 1 }}>{`GO PRO — ${CONFIG.priceShort}`}</div>
           <div style={{ fontFamily: 'Rajdhani, sans-serif', color: T.body, fontSize: 14, margin: '4px 0 12px' }}>
-            Unlock the Legends level (150 questions), 5 hints, 3 streak shields, a daily points bonus, and the Pro leaderboard with a 👑 badge.
+            Unlock the Legends level (150 questions), 5 hints, 3 streak shields, a daily points bonus, and the Pro leaderboard with a premium badge.
           </div>
           <PrimaryButton onClick={onUnlockPro}>Unlock Pro</PrimaryButton>
         </Card>
@@ -1213,13 +1257,13 @@ function Home({ career, isPro, onStart, onUnlockPro, onManagePro, onLeaderboard,
   )
 }
 
-function ModeTile({ title, emoji, sub, onClick, locked }) {
+function ModeTile({ title, icon, sub, onClick, locked }) {
   return (
     <div onClick={onClick} style={{
       background: T.card, border: `1px solid ${locked ? `${T.gold}55` : T.border}`, borderRadius: 16,
       padding: 16, cursor: 'pointer', boxShadow: T.cardShadow, position: 'relative',
     }}>
-      <div style={{ fontSize: 26 }}>{emoji}</div>
+      <div style={{ color: locked ? T.gold : T.text, marginBottom: 2 }}>{icon}</div>
       <div style={{ fontFamily: 'Bebas Neue, sans-serif', color: T.text, fontSize: 24, letterSpacing: 1, marginTop: 4 }}>{title}</div>
       <div style={{ fontFamily: 'Rajdhani, sans-serif', color: locked ? T.gold : T.dim, fontSize: 13, fontWeight: 600 }}>{sub}</div>
     </div>
@@ -1243,9 +1287,9 @@ function LevelPicker({ isPro, onPick, onBack, title }) {
               <div style={{ width: 10, height: 44, borderRadius: 999, background: l.color }} />
               <div style={{ flex: 1 }}>
                 <div style={{ fontFamily: 'Bebas Neue, sans-serif', color: T.text, fontSize: 28, letterSpacing: 1 }}>{l.label}</div>
-                <div style={{ fontFamily: 'Rajdhani, sans-serif', color: T.dim, fontSize: 13 }}>×{l.mult} points {locked ? '· Pro only 👑' : ''}</div>
+                <div style={{ fontFamily: 'Rajdhani, sans-serif', color: T.dim, fontSize: 13 }}>×{l.mult} points {locked ? '· Pro only' : ''}</div>
               </div>
-              <span style={{ fontSize: 20 }}>{locked ? '🔒' : '›'}</span>
+              <span style={{ display: 'inline-flex' }}><Icon name={locked ? 'lock' : 'chevronRight'} size={18} color={locked ? T.gold : T.dim} /></span>
             </div>
           )
         })}
@@ -1373,8 +1417,9 @@ function Game({ deck, level, mode, isPro, onFinish, onExit }) {
       <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
         <button onClick={() => setConfirmQuit(true)} style={{
           background: T.surface, border: `1px solid ${T.border}`, color: T.body, borderRadius: 12,
-          width: 38, height: 38, cursor: 'pointer', fontSize: 16,
-        }}>✕</button>
+          width: 38, height: 38, cursor: 'pointer',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+        }}><Icon name="close" size={16} /></button>
         <div style={{ flex: 1 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'Rajdhani, sans-serif', fontSize: 13, color: T.dim, marginBottom: 4 }}>
             <span>Q {idx + 1}/{deck.length}</span>
@@ -1390,10 +1435,10 @@ function Game({ deck, level, mode, isPro, onFinish, onExit }) {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
           <Pill color={catColor} bg={`${catColor}1f`}>{cat}</Pill>
-          {streak > 1 && <span style={{ fontFamily: 'Rajdhani, sans-serif', color: T.gold, fontWeight: 700, fontSize: 14 }}>🔥 {streak}</span>}
+          {streak > 1 && <span style={{ fontFamily: 'Rajdhani, sans-serif', color: T.gold, fontWeight: 700, fontSize: 14, display: 'inline-flex', alignItems: 'center', gap: 5 }}><Icon name="flame" size={15} /> {streak}</span>}
         </div>
         <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
-          <span style={{ fontFamily: 'Rajdhani, sans-serif', fontSize: 12, color: T.dim }}>🛡️ {shields}</span>
+          <span style={{ fontFamily: 'Rajdhani, sans-serif', fontSize: 12, color: T.dim, display: 'inline-flex', alignItems: 'center', gap: 5 }}><Icon name="shield" size={13} /> {shields}</span>
           <div style={{ position: 'relative', width: 46, height: 46 }}>
             <svg width="46" height="46" viewBox="0 0 46 46">
               <circle cx="23" cy="23" r="19" fill="none" stroke={T.border} strokeWidth="4" />
@@ -1440,7 +1485,7 @@ function Game({ deck, level, mode, isPro, onFinish, onExit }) {
             background: 'rgba(234,179,8,0.10)', border: '1px solid rgba(234,179,8,0.30)',
             borderRadius: 14, padding: 14, marginBottom: 12,
           }}>
-            <div style={{ fontFamily: 'Rajdhani, sans-serif', color: T.gold, fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 4 }}>{`${CONFIG.emoji} Fun Fact`}</div>
+            <div style={{ fontFamily: 'Rajdhani, sans-serif', color: T.gold, fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 4 }}><span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon name="info" size={12} /> Fun Fact</span></div>
             <div style={{ fontFamily: 'Rajdhani, sans-serif', color: T.body, fontSize: 15, lineHeight: 1.4 }}>{q.fact}</div>
           </div>
           <PrimaryButton onClick={next}>{idx + 1 >= deck.length ? 'See Results' : 'Next'}</PrimaryButton>
@@ -1449,7 +1494,7 @@ function Game({ deck, level, mode, isPro, onFinish, onExit }) {
         <div style={{ marginTop: 14 }}>
           <GhostButton onClick={useHint} color={hints > 0 ? T.gold : T.dim}
             style={{ opacity: hints > 0 && !eliminated.length ? 1 : 0.5 }}>
-            💡 Use Hint ({hints} left)
+            <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}><Icon name="bulb" size={16} /> Use Hint ({hints} left)</span>
           </GhostButton>
         </div>
       )}
@@ -1474,14 +1519,14 @@ function ShareCard({ result, rank, isPro }) {
       padding: 22, textAlign: 'center', boxShadow: T.cardShadow,
     }}>
       <div style={{ fontFamily: 'Rajdhani, sans-serif', color: T.gold, letterSpacing: 3, fontSize: 12, textTransform: 'uppercase' }}>{CONFIG.brand}</div>
-      <div style={{ fontSize: 34, margin: '4px 0' }}>{CONFIG.emoji}</div>
+      <div style={{ margin: '4px 0', display: 'flex', justifyContent: 'center' }}><BrandMark size={52} /></div>
       <div style={{ fontFamily: 'Bebas Neue, sans-serif', color: '#FFFFFF', fontSize: 56, lineHeight: 0.9 }}>{result.score.toLocaleString()}</div>
       <div style={{ fontFamily: 'Rajdhani, sans-serif', color: T.bright, fontSize: 15, marginBottom: 8 }}>
         {result.correct}/{result.total} correct · {L ? L.label : ''} {result.mode === 'daily' ? '· Daily' : ''}
       </div>
       <div style={{ display: 'inline-flex', gap: 8, alignItems: 'center' }}>
-        <Pill>{rank.name}{isPro ? ' 👑' : ''}</Pill>
-        {result.bestStreak > 1 && <Pill color="#F87171" bg="rgba(248,113,113,0.15)">🔥 {result.bestStreak} streak</Pill>}
+        <Pill>{rank.name}{isPro ? <Icon name="crown" size={12} color="currentColor" style={{ display: 'inline-block', verticalAlign: '-2px', marginLeft: 4 }} /> : null}</Pill>
+        {result.bestStreak > 1 && <Pill color="#F87171" bg="rgba(248,113,113,0.15)"><span style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}><Icon name="flame" size={13} color="currentColor" /> {result.bestStreak} streak</span></Pill>}
       </div>
     </div>
   )
@@ -1496,7 +1541,7 @@ function Result({ result, career, isPro, name, onHome, onAgain, onLeaderboard })
     `${CONFIG.emoji} ${CONFIG.brand}\n` +
     `Score: ${result.score.toLocaleString()} (${result.correct}/${result.total})\n` +
     `Level: ${LEVEL_BY_ID[result.level]?.label}${result.mode === 'daily' ? ' · Daily Challenge' : ''}\n` +
-    `Rank: ${rank.name}${isPro ? ' 👑' : ''}\n` +
+    `Rank: ${rank.name}${isPro ? '  •  PRO' : ''}\n` +
     `Can you beat me?`
 
   async function share() {
@@ -1530,10 +1575,10 @@ function Result({ result, career, isPro, name, onHome, onAgain, onLeaderboard })
       </div>
 
       <div style={{ display: 'grid', gap: 10 }}>
-        <PrimaryButton onClick={saveCard}>🖼️ Share Score Card</PrimaryButton>
-        <GhostButton onClick={share}>📋 Copy score as text</GhostButton>
+        <PrimaryButton onClick={saveCard}><span style={{display:'inline-flex',alignItems:'center',justifyContent:'center',gap:8}}><Icon name="image" size={16} color="currentColor" />Share Score Card</span></PrimaryButton>
+        <GhostButton onClick={share}><span style={{display:'inline-flex',alignItems:'center',justifyContent:'center',gap:8}}><Icon name="clipboard" size={16} />Copy score as text</span></GhostButton>
         {(shareMsg || cardMsg) && <div style={{ fontFamily: 'Rajdhani, sans-serif', color: T.gold, fontSize: 13, textAlign: 'center' }}>{shareMsg || cardMsg}</div>}
-        <GhostButton onClick={onLeaderboard} color={T.gold}>🏆 Leaderboard</GhostButton>
+        <GhostButton onClick={onLeaderboard} color={T.gold}><span style={{display:'inline-flex',alignItems:'center',justifyContent:'center',gap:8}}><Icon name="trophy" size={16} />Leaderboard</span></GhostButton>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
           <GhostButton onClick={onAgain}>Play Again</GhostButton>
           <GhostButton onClick={onHome}>Home</GhostButton>
@@ -1602,7 +1647,7 @@ function Leaderboard({ isPro, pendingScore, onBack, playerName, onName }) {
               background: T.surface, border: `1px solid ${T.border}`, color: T.text,
               fontFamily: 'Rajdhani, sans-serif', fontSize: 16, outline: 'none',
             }} />
-          <PrimaryButton onClick={submit} disabled={!name.trim()}>Submit{isPro ? ' 👑' : ''}</PrimaryButton>
+          <PrimaryButton onClick={submit} disabled={!name.trim()}>Submit{isPro ? <Icon name="crown" size={12} color="currentColor" style={{ display: 'inline-block', verticalAlign: '-2px', marginLeft: 4 }} /> : null}</PrimaryButton>
         </Card>
       )}
 
@@ -1619,7 +1664,7 @@ function Leaderboard({ isPro, pendingScore, onBack, playerName, onName }) {
             background: tab === t ? T.gold : T.surface, color: tab === t ? T.ink : T.body,
             border: `1px solid ${tab === t ? T.gold : T.border}`, fontFamily: 'Rajdhani, sans-serif',
             fontWeight: 700, textTransform: 'uppercase', fontSize: 13, letterSpacing: 0.5,
-          }}>{t === 'all' ? 'All' : 'Pro 👑'}</button>
+          }}>{t === 'all' ? 'All' : (<span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>Pro <Icon name="crown" size={12} color="currentColor" /></span>)}</button>
         ))}
       </div>
 
@@ -1637,7 +1682,7 @@ function Leaderboard({ isPro, pendingScore, onBack, playerName, onName }) {
               <div style={{ fontFamily: 'Bebas Neue, sans-serif', color: i < 3 ? T.gold : T.dim, fontSize: 22, width: 30 }}>{i + 1}</div>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ fontFamily: 'Rajdhani, sans-serif', color: T.text, fontSize: 16, fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                  {r.name} {r.is_pro ? '👑' : ''}
+                  {r.name} {r.is_pro ? <Icon name="crown" size={12} color={T.gold} style={{ display: 'inline-block', verticalAlign: '-2px' }} /> : null}
                 </div>
                 <div style={{ fontFamily: 'Rajdhani, sans-serif', color: T.dim, fontSize: 12 }}>
                   {r.level}{r.is_daily ? ' · Daily' : ''}
@@ -1673,7 +1718,7 @@ function ProModal({ onClose, onSimulate, onCheckout, configured, reason }) {
         {msg && <div style={{ fontFamily: 'Rajdhani, sans-serif', color: T.text, fontSize: 14, marginTop: 6 }}>{msg}</div>}
         <div style={{ fontFamily: 'Rajdhani, sans-serif', color: T.body, fontSize: 15, margin: '8px 0 14px', lineHeight: 1.4 }}>
           {CONFIG.priceLabel}. Unlocks the {CONFIG.levelLabels.pro} and {CONFIG.levelLabels.legends} levels (350 questions) plus unlimited play,
-          5 hints & 3 streak shields per game, a daily points bonus, and the Pro leaderboard 👑 badge.
+          5 hints & 3 streak shields per game, a daily points bonus, and the Pro leaderboard badge.
         </div>
         {configured ? (
           <>
@@ -1806,9 +1851,9 @@ async function shareScoreCard({ result, rank, isPro, name }) {
   const L = LEVEL_BY_ID[result.level]
   x.fillText(result.correct + '/' + result.total + ' correct · ' + (L ? L.label : ''), W / 2, 508)
   x.fillStyle = '#C8D3CB'; x.font = '30px Rajdhani, Arial, sans-serif'
-  x.fillText('Rank: ' + rank.name + (isPro ? ' 👑' : ''), W / 2, 578)
+  x.fillText('Rank: ' + rank.name + (isPro ? '  \u2022  PRO' : ''), W / 2, 578)
   if (name) { x.fillStyle = '#9AAA9E'; x.font = '30px Rajdhani, Arial, sans-serif'; x.fillText(name, W / 2, 636) }
-  if (result.bestStreak > 1) { x.fillStyle = '#F87171'; x.font = '28px Rajdhani, Arial, sans-serif'; x.fillText('🔥 ' + result.bestStreak + ' streak', W / 2, 694) }
+  if (result.bestStreak > 1) { x.fillStyle = '#F87171'; x.font = '28px Rajdhani, Arial, sans-serif'; x.fillText(result.bestStreak + ' streak', W / 2, 694) }
   x.fillStyle = '#7C8A80'; x.font = '26px Rajdhani, Arial, sans-serif'
   x.fillText('Can you beat me?', W / 2, H - 86)
   const blob = await new Promise(res => cv.toBlob(res, 'image/png'))
